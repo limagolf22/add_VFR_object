@@ -1,0 +1,31 @@
+<AssetPackage Name="add-VFR-object" Version="0.1.0">
+	<ItemSettings>
+		<ContentType>SCENERY</ContentType>
+		<Title>add_VFR_object</Title>
+		<Manufacturer>LimaGolf22</Manufacturer>
+		<Creator>LimaGolf22</Creator>
+	</ItemSettings>
+	<Flags>
+		<VisibleInStore>false</VisibleInStore>
+		<CanBeReferenced>false</CanBeReferenced>
+	</Flags>
+	<AssetGroups>
+		<AssetGroup Name="ContentInfo">
+			<Type>ContentInfo</Type>
+			<Flags>
+				<FSXCompatibility>false</FSXCompatibility>
+			</Flags>
+			<AssetDir>PackageDefinitions\add-VFR-object\ContentInfo</AssetDir>
+			<OutputDir>ContentInfo\add-VFR-object\</OutputDir>
+		</AssetGroup>
+		<AssetGroup Name="water-VFR-object-asset">
+			<Type>BGL</Type>
+			<Flags>
+				<FSXCompatibility>false</FSXCompatibility>
+			</Flags>
+			<AssetDir>source\</AssetDir>
+			<OutputDir>scenery\</OutputDir>
+		</AssetGroup>
+	</AssetGroups>
+</AssetPackage>
+

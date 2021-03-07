@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Data;
+
 namespace WindowsForms_add_water_tower
 {
     partial class Form1
@@ -34,15 +37,16 @@ namespace WindowsForms_add_water_tower
             this.load_table = new System.Windows.Forms.Button();
             this.compile = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.add_object = new System.Windows.Forms.Button();
             this.open_button = new System.Windows.Forms.Button();
             this.listOpen = new System.Windows.Forms.ComboBox();
             this.new_text = new System.Windows.Forms.TextBox();
             this.new_button = new System.Windows.Forms.Button();
+            this.object_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +63,7 @@ namespace WindowsForms_add_water_tower
             this.load_table.Name = "load_table";
             this.load_table.Size = new System.Drawing.Size(138, 20);
             this.load_table.TabIndex = 0;
-            this.load_table.Text = "load table in the .csv file";
+            this.load_table.Text = "save table in the .csv file";
             this.load_table.UseVisualStyleBackColor = true;
             this.load_table.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -80,16 +84,79 @@ namespace WindowsForms_add_water_tower
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.object_type,
             this.Nom,
             this.Latitude,
             this.Longitude,
             this.Scale});
-            this.dataGridView1.Location = new System.Drawing.Point(88, 114);
+            this.dataGridView1.Location = new System.Drawing.Point(49, 114);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(448, 249);
+            this.dataGridView1.Size = new System.Drawing.Size(546, 249);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // add_object
+            // 
+            this.add_object.Location = new System.Drawing.Point(309, 77);
+            this.add_object.Name = "add_object";
+            this.add_object.Size = new System.Drawing.Size(131, 22);
+            this.add_object.TabIndex = 10;
+            this.add_object.Text = "add object (google map)";
+            this.add_object.UseVisualStyleBackColor = true;
+            this.add_object.Click += new System.EventHandler(this.add_object_Click);
+            // 
+            // open_button
+            // 
+            this.open_button.Location = new System.Drawing.Point(147, 10);
+            this.open_button.Name = "open_button";
+            this.open_button.Size = new System.Drawing.Size(43, 21);
+            this.open_button.TabIndex = 12;
+            this.open_button.Text = "open";
+            this.open_button.UseVisualStyleBackColor = true;
+            this.open_button.Click += new System.EventHandler(this.open_button_Click);
+            // 
+            // listOpen
+            // 
+            this.listOpen.FormattingEnabled = true;
+            this.listOpen.Location = new System.Drawing.Point(11, 10);
+            this.listOpen.Name = "listOpen";
+            this.listOpen.Size = new System.Drawing.Size(121, 21);
+            this.listOpen.TabIndex = 13;
+            // 
+            // new_text
+            // 
+            this.new_text.Location = new System.Drawing.Point(11, 38);
+            this.new_text.Name = "new_text";
+            this.new_text.Size = new System.Drawing.Size(121, 20);
+            this.new_text.TabIndex = 14;
+            // 
+            // new_button
+            // 
+            this.new_button.Location = new System.Drawing.Point(147, 34);
+            this.new_button.Name = "new_button";
+            this.new_button.Size = new System.Drawing.Size(43, 23);
+            this.new_button.TabIndex = 15;
+            this.new_button.Text = "new";
+            this.new_button.UseVisualStyleBackColor = true;
+            this.new_button.Click += new System.EventHandler(this.new_button_Click);
+            // 
+            // object_type
+            // 
+            object_table = new DataTable("objects");
+            object_table.Columns.Add("Id", typeof(int));
+            object_table.Columns.Add("Name", typeof(string));
+
+            this.object_type.DataSource = object_table;
+            this.object_type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.object_type.HeaderText = "object type";
+            this.object_type.ValueMember = "Id";
+            this.object_type.DisplayMember = "Name";
+            this.object_type.ValueType = typeof(int);
+            /*     this.object_type.Items.AddRange(new object[] {
+                 WindowsForms_add_water_tower.VFR_objects.water_tower,
+                 WindowsForms_add_water_tower.VFR_objects.aerial}); */
+            this.object_type.Name = "object_type";
             // 
             // Nom
             // 
@@ -111,53 +178,8 @@ namespace WindowsForms_add_water_tower
             // 
             // Scale
             // 
-            this.Scale.HeaderText = "scale";
+            this.Scale.HeaderText = "height";
             this.Scale.Name = "Scale";
-            // 
-            // add_object
-            // 
-            this.add_object.Location = new System.Drawing.Point(309, 77);
-            this.add_object.Name = "add_object";
-            this.add_object.Size = new System.Drawing.Size(131, 22);
-            this.add_object.TabIndex = 10;
-            this.add_object.Text = "add object (google map)";
-            this.add_object.UseVisualStyleBackColor = true;
-            this.add_object.Click += new System.EventHandler(this.add_object_Click);
-            // 
-            // open_button
-            // 
-            this.open_button.Location = new System.Drawing.Point(165, 20);
-            this.open_button.Name = "open_button";
-            this.open_button.Size = new System.Drawing.Size(43, 21);
-            this.open_button.TabIndex = 12;
-            this.open_button.Text = "open";
-            this.open_button.UseVisualStyleBackColor = true;
-            this.open_button.Click += new System.EventHandler(this.open_button_Click);
-            // 
-            // listOpen
-            // 
-            this.listOpen.FormattingEnabled = true;
-            this.listOpen.Location = new System.Drawing.Point(29, 20);
-            this.listOpen.Name = "listOpen";
-            this.listOpen.Size = new System.Drawing.Size(121, 21);
-            this.listOpen.TabIndex = 13;
-            // 
-            // new_text
-            // 
-            this.new_text.Location = new System.Drawing.Point(29, 48);
-            this.new_text.Name = "new_text";
-            this.new_text.Size = new System.Drawing.Size(121, 20);
-            this.new_text.TabIndex = 14;
-            // 
-            // new_button
-            // 
-            this.new_button.Location = new System.Drawing.Point(165, 44);
-            this.new_button.Name = "new_button";
-            this.new_button.Size = new System.Drawing.Size(43, 23);
-            this.new_button.TabIndex = 15;
-            this.new_button.Text = "new";
-            this.new_button.UseVisualStyleBackColor = true;
-            this.new_button.Click += new System.EventHandler(this.new_button_Click);
             // 
             // Form1
             // 
@@ -189,15 +211,16 @@ namespace WindowsForms_add_water_tower
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button compile;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Latitude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Scale;
         private System.Windows.Forms.Button add_object;
         private System.Windows.Forms.Button open_button;
         private System.Windows.Forms.ComboBox listOpen;
         private System.Windows.Forms.TextBox new_text;
         private System.Windows.Forms.Button new_button;
+        private System.Windows.Forms.DataGridViewComboBoxColumn object_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Latitude;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Scale;
     }
 }
 

@@ -62,7 +62,7 @@ namespace WindowsForms_add_water_tower
             string parameters_batch = "";
             for (int i = 0; i < checkedListBox1.CheckedItems.Count; i++)
             {
-                parameters_batch += ("./object_datas/" + checkedListBox1.CheckedItems[i] + " ");
+                parameters_batch += ("../object_datas/" + checkedListBox1.CheckedItems[i] + " ");
 
             }
     

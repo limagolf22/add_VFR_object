@@ -1,6 +1,6 @@
 # add_VFR_object
 allow you to add simple VFR objects to your FS2020 scenery
-# add_water_tower
+# add_VFR_object
 *plug-in supposed to allow you to add simple VFR objects (water towers, antennas, trees...), to your FS2020 scenery !* 
 
 
@@ -21,8 +21,10 @@ allow you to add simple VFR objects to your FS2020 scenery
   
 **Installation process :**
 
-  Just copy the two folders (add_water_tower and water_tower_scenery) in your Community folder (where FS2020 has been installed in your computer). The SDK is not
+  Just copy the two folders (add_VFR_object and VFR_object_scenery) in your Community folder (where FS2020 has been installed in your computer). The SDK is not
   necessary.
-
+  
+  
+Big thanks to Soulao and Haroku for their help concerning testing and debugging !
   
 

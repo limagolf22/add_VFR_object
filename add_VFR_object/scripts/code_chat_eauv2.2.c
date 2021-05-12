@@ -7,6 +7,7 @@ typedef struct {
     float lat;
     float lon;
     float height;
+    int heading;
 } Object;
 
 typedef struct {
@@ -27,8 +28,7 @@ float get_lat(char coord[]);
 float get_lon(char coord[]);
 
 int main(int argc, char *argv[]) {
-    printf("debut programme\n");
-    
+
     FILE* file_params = NULL;
     file_params = fopen("../param_objects.txt", "r");
     if (file_params == NULL) {
@@ -51,8 +51,8 @@ int main(int argc, char *argv[]) {
         nLignes++; /* Derni�re ligne non finie */
     }
     rewind(file_params);
-    
-    Parameters param_list[nLignes];
+    const int nl = nLignes;
+    Parameters param_list[nl];
 
     int i_conf = 0;
     char buffer2[250];
@@ -64,6 +64,8 @@ int main(int argc, char *argv[]) {
         i_conf++;
     }
     fclose(file_params);
+
+                                //-------creation .xml---------
     FILE * file_w = NULL;
     if (argc<=1) {
         printf("at least 1 .csv file is necessary");
@@ -86,7 +88,7 @@ int main(int argc, char *argv[]) {
             printf("missing file : %s  or not well defined\n",argv[ai]);
             return(1);
         }
-        printf("ouverture fichier %s\n",argv[ai]);
+        printf("opening files %s\n",argv[ai]);
 
         int is_deg=0;
         char coord_lat[50];
@@ -101,6 +103,7 @@ int main(int argc, char *argv[]) {
             object.lat=0.0;
             object.lon=0.0;
             object.height=1.0;
+            object.heading =-180;
             int check_confo=1;
             int k=0,check_item=0;
 
@@ -123,21 +126,22 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             if (is_deg) {
-                if (sscanf(buffer,"%d;%[^;];%[^;];%[^;];%f",object.id,object.name,coord_lat,coord_lon,&(object.height))!=5) {
+                if (sscanf(buffer,"%d;%[^;];%[^;];%[^;];%f;%d",object.id,object.name,coord_lat,coord_lon,&(object.height),&(object.heading))!=6) {
                     printf("object %d is not complete\n",i);
                 };
                 object.lat=get_lat(coord_lat);
                 object.lon=get_lon(coord_lon);
             }
             else {
-                if (sscanf(buffer,"%d;%[^;];%f;%f;%f",&(object.id),object.name,&(object.lat),&(object.lon),&(object.height))!=5) {
+                if (sscanf(buffer,"%d;%[^;];%f;%f;%f;%d",&(object.id),object.name,&(object.lat),&(object.lon),&(object.height),&(object.heading))!=6) {
                     printf("object %i is not complete\n",i);
                 };	    
             }
-            fprintf(file_w,"\n\t<!--SceneryObject name: %s -->\n\t<SceneryObject lat=\"%f\" lon=\"%f\" alt=\"0.00000000000000\" pitch=\"0.000000\" bank=\"0.000000\" heading=\"-180.00\" imageComplexity=\"VERY_SPARSE\" altitudeIsAgl=\"TRUE\" snapToGround=\"TRUE\" snapToNormal=\"FALSE\">\n\t\t<LibraryObject name=\"{%s}\" scale=\"%f\"/>\n\t</SceneryObject>"
+            fprintf(file_w,"\n\t<!--SceneryObject name: %s -->\n\t<SceneryObject lat=\"%f\" lon=\"%f\" alt=\"0.00000000000000\" pitch=\"0.000000\" bank=\"0.000000\" heading=\"%d\" imageComplexity=\"VERY_SPARSE\" altitudeIsAgl=\"TRUE\" snapToGround=\"TRUE\" snapToNormal=\"FALSE\">\n\t\t<LibraryObject name=\"{%s}\" scale=\"%f\"/>\n\t</SceneryObject>"
             ,param_list[object.id].name
             ,object.lat
             ,object.lon
+            ,object.heading
             ,param_list[object.id].ref
             ,object.height/(param_list[object.id].height));    
  //           printf("loop %i ends, is_deg: %i, name is %s \n",i,is_deg,param_list[object.id].name);

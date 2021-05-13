@@ -37,17 +37,21 @@ namespace WindowsForms_add_water_tower
             this.load_table = new System.Windows.Forms.Button();
             this.compile = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.object_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.object_table = new System.Data.DataTable();
+            this.Nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.add_object = new System.Windows.Forms.Button();
             this.open_button = new System.Windows.Forms.Button();
             this.listOpen = new System.Windows.Forms.ComboBox();
             this.new_text = new System.Windows.Forms.TextBox();
             this.new_button = new System.Windows.Forms.Button();
-            this.object_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Scale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.view_objects_button = new System.Windows.Forms.Button();
+            this.heading = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.object_table)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -88,13 +92,54 @@ namespace WindowsForms_add_water_tower
             this.Nom,
             this.Latitude,
             this.Longitude,
-            this.Scale});
-            this.dataGridView1.Location = new System.Drawing.Point(49, 114);
+            this.Scale,
+            this.heading});
+            this.dataGridView1.Location = new System.Drawing.Point(0, 114);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(546, 249);
+            this.dataGridView1.Size = new System.Drawing.Size(645, 249);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // object_type
+            // 
+            //  object_table = new DataTable("objects");
+            object_table.Columns.Add("Id", typeof(int));
+            object_table.Columns.Add("Name", typeof(string));
+
+            this.object_type.DataSource = object_table;
+            this.object_type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.object_type.HeaderText = "object type";
+            this.object_type.ValueMember = "Id";
+            this.object_type.DisplayMember = "Name";
+            this.object_type.ValueType = typeof(int);
+            /*     this.object_type.Items.AddRange(new object[] {
+                 WindowsForms_add_water_tower.VFR_objects.water_tower,
+                 WindowsForms_add_water_tower.VFR_objects.aerial}); */
+            this.object_type.Name = "object_type";
+            // 
+            // Nom
+            // 
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Nom.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Nom.HeaderText = "Nom";
+            this.Nom.Name = "Nom";
+            // 
+            // Latitude
+            // 
+            this.Latitude.HeaderText = "Lat";
+            this.Latitude.Name = "Latitude";
+            // 
+            // Longitude
+            // 
+            this.Longitude.HeaderText = "Lon";
+            this.Longitude.Name = "Longitude";
+            // 
+            // Scale
+            // 
+            this.Scale.HeaderText = "height";
+            this.Scale.Name = "Scale";
             // 
             // add_object
             // 
@@ -141,51 +186,27 @@ namespace WindowsForms_add_water_tower
             this.new_button.UseVisualStyleBackColor = true;
             this.new_button.Click += new System.EventHandler(this.new_button_Click);
             // 
-            // object_type
+            // view_objects_button
             // 
-            object_table = new DataTable("objects");
-            object_table.Columns.Add("Id", typeof(int));
-            object_table.Columns.Add("Name", typeof(string));
-
-            this.object_type.DataSource = object_table;
-            this.object_type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.object_type.HeaderText = "object type";
-            this.object_type.ValueMember = "Id";
-            this.object_type.DisplayMember = "Name";
-            this.object_type.ValueType = typeof(int);
-            /*     this.object_type.Items.AddRange(new object[] {
-                 WindowsForms_add_water_tower.VFR_objects.water_tower,
-                 WindowsForms_add_water_tower.VFR_objects.aerial}); */
-            this.object_type.Name = "object_type";
+            this.view_objects_button.Location = new System.Drawing.Point(555, 10);
+            this.view_objects_button.Name = "view_objects_button";
+            this.view_objects_button.Size = new System.Drawing.Size(75, 23);
+            this.view_objects_button.TabIndex = 16;
+            this.view_objects_button.Text = "view objects";
+            this.view_objects_button.UseVisualStyleBackColor = true;
+            this.view_objects_button.Click += new System.EventHandler(this.view_objects_button_Click);
             // 
-            // Nom
+            // heading
             // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Nom.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Nom.HeaderText = "Nom";
-            this.Nom.Name = "Nom";
-            // 
-            // Latitude
-            // 
-            this.Latitude.HeaderText = "Lat";
-            this.Latitude.Name = "Latitude";
-            // 
-            // Longitude
-            // 
-            this.Longitude.HeaderText = "Lon";
-            this.Longitude.Name = "Longitude";
-            // 
-            // Scale
-            // 
-            this.Scale.HeaderText = "height";
-            this.Scale.Name = "Scale";
+            this.heading.HeaderText = "heading";
+            this.heading.Name = "heading";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(641, 404);
+            this.Controls.Add(this.view_objects_button);
             this.Controls.Add(this.new_button);
             this.Controls.Add(this.new_text);
             this.Controls.Add(this.listOpen);
@@ -201,6 +222,7 @@ namespace WindowsForms_add_water_tower
             this.Text = "add water tower";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.object_table)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,6 +243,8 @@ namespace WindowsForms_add_water_tower
         private System.Windows.Forms.DataGridViewTextBoxColumn Latitude;
         private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
         private System.Windows.Forms.DataGridViewTextBoxColumn Scale;
+        private System.Windows.Forms.Button view_objects_button;
+        private System.Windows.Forms.DataGridViewTextBoxColumn heading;
     }
 }
 

@@ -46,8 +46,7 @@ namespace WindowsForms_add_water_tower
             {
                 Debug.WriteLine("Exception: " + e_params.Message);
             }
-
-            
+         
             object_type.DefaultCellStyle.NullValue = object_table.Rows[0]["Name"];
             object_type.DefaultCellStyle.DataSourceNullValue = object_table.Rows[0]["Name"];
             Debug.WriteLine(object_type.DefaultCellStyle.NullValue);
@@ -100,7 +99,7 @@ namespace WindowsForms_add_water_tower
                         {
                             int_combo = (int)row.Cells[0].Value;
                         }
-                        sw.WriteLine("{0};{1};{2};{3};{4}", int_combo, row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString(), row.Cells[4].Value.ToString());
+                        sw.WriteLine("{0};{1};{2};{3};{4};{5}", int_combo, row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString(), row.Cells[4].Value.ToString(), row.Cells[5].Value.ToString());
                     }
                 }
                 catch (Exception e2)
@@ -134,7 +133,7 @@ namespace WindowsForms_add_water_tower
             {
                 string[] parse_obj;
                 parse_obj = textBox1.Text.Split(new[] { ", " }, StringSplitOptions.None);
-                dataGridView1.Rows.Add(0,"", parse_obj[0], parse_obj[1], "15.0");
+                dataGridView1.Rows.Add(0,"", parse_obj[0], parse_obj[1], "15.0", "-180");
                 textBox1.Text = "";
             }
             catch (Exception e_add)
@@ -183,7 +182,7 @@ namespace WindowsForms_add_water_tower
                     Debug.WriteLine(line);
                     parse = line.Split(';');
                     int obj = int.Parse(parse[0]);
-                    dataGridView1.Rows.Add(obj, parse[1], parse[2], parse[3],parse[4]);
+                    dataGridView1.Rows.Add(obj, parse[1], parse[2], parse[3],parse[4],parse[5]);
                     //Read the next line
                     line = sr.ReadLine();
                 }
@@ -216,6 +215,13 @@ namespace WindowsForms_add_water_tower
             refresh_table();
             listOpen.SelectedItem = new_text.Text + ".csv";
             new_text.Text = "";
+        }
+
+        private void view_objects_button_Click(object sender, EventArgs e)
+        {
+            FormVisual f2 = new FormVisual();
+            f2.Show();
+            
         }
     }
 }
